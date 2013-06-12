@@ -36,9 +36,9 @@
 			if ($fields['url_1'] == "installer"){
 				// check the platform
 				if (!isset($fields['url_2'])){
-					throw new ApiException("Missing required parameter 'platform'.", 100);
+					throw new ApiException("Missing required parameter 'platform'.", ErrorCode::E_MISS_REQ_KEY);
 				} else if (!in_array($fields['url_2'], array_keys($platformConfig))){
-					throw new ApiException("Value '" . $fields['url_2'] . "' not possible for field 'platform'.", 105);
+					throw new ApiException("Value '" . $fields['url_2'] . "' not possible for field 'platform'.", ErrorCode::E_VAL_NOT_POSSIBLE);
 				}
 				
 				$platform = $fields['url_2'];
