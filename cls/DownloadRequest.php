@@ -1,7 +1,7 @@
 <?php
 	abstract class DownloadRequest extends Request {
 		
-		private $filePath = "";
+		private $filePath = ""; // path to the file to download
 		
 		protected function setFilePath($path){
 			$this->filePath = $path;
