@@ -54,7 +54,7 @@
 				$requestCount = $sth->fetch(PDO::FETCH_ASSOC);
 				
 				if ($requestCount['r'] > 10){
-					throw new ApiException("Rate limit exceeded.", 108);
+					throw new ApiException("Rate limit exceeded.", ErrorCode::E_RATE_LIM_EXCEEDED);
 				} else {
 					$r = new $className($pdo);
 					
@@ -107,12 +107,12 @@
 				}
 			} else {
 				$msg = "No such method '$className'.";
-				throw new ApiException($msg, 102);
+				throw new ApiException($msg, ErrorCode::E_NO_SUCH_METHOD);
 			}
 		} catch (PDOException $e){
 			// don't show the database errors to the user but log the message in our db
 			$msg = "Database exception. " . $e->getMessage();
-			throw new ApiException("Database exception.", 105);
+			throw new ApiException("Database exception.", ErrorCode::E_DATABASE);
 		}
 	} catch (ApiException $e){
 		// ApiExceptions are always formatted as json
