@@ -3,8 +3,16 @@
 	
 		private $c404 = "That's an error. Page not found.";
 	
+		protected $m;
+	
 		public function __construct(PDO $pdo){
 			parent::__construct($pdo);
+			
+			// html needs Mustache :)
+			require_once "cls/includes/Mustache/Autoloader.php";
+			Mustache_Autoloader::register();
+			
+			$this->m = new Mustache_Engine();
 			
 			$this->setHeader("Content-type", "text/html");
 		}

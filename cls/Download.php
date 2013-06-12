@@ -70,6 +70,12 @@
 					// mod does not exist
 					$this->setResult(false, "Download does not exist.");
 				} else {
+					$sth = $this->pdo->prepare("UPDATE mods
+								SET downloads = downloads + 1
+								WHERE id = ?");
+					$sth->bindValue($mod['id'], PDO::PARAM_INT);
+					$sth->execute();
+				
 					$this->setResult(true, "");					
 					$this->setFilePath(sprintf("downloads/mods/%d/%s.mod.dll", $mod['id'], $mod['name']));
 					
