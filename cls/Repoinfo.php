@@ -19,7 +19,7 @@
 			$this->setResult(true, array(
 						"name" 	=> REPO_NAME, 
 						"url" 	=> REPO_URL, 
-						"version"	=> REPO_VERSION,
+						"version"	=> 1,
 						"mods" 	=> $modsInRepo
 			));
 		}

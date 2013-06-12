@@ -98,8 +98,7 @@
 						}
 					} else if ($r->getType() == TYPE::DOWNLOAD){
 						if ($result[0]){
-							ob_end_flush();
-							readfile($r->getFilePath());
+							$r->download();
 						} else {
 							header("Content-type: application/json");
 							echo json_encode(array("msg" => "fail", "data" => $result[1]));

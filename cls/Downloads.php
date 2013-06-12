@@ -1,5 +1,5 @@
 <?php
-	class Mods extends HTMLRequest {
+	class Downloads extends HTMLRequest {
 	
 		public function parseRequest($params){
 			
