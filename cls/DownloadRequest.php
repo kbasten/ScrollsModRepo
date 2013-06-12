@@ -5,19 +5,19 @@
 		
 		protected function setFilePath($path){
 			$this->filePath = $path;
+			
+			if (!file_exists($this->filePath)){
+				// throwing an exception here prevents the content type from downloading the file
+				// which then only has the error in it
+				throw new ApiException("Download file not found.", 110);
+			}
 		}
 		
 		public function getFilePath(){
 			if ($this->filePath == ""){
 				throw new ApiException("Download file path not set.", 109);
-			} else if (!file_exists($this->filePath)){
-				throw new ApiException("Download file not found.", 110);
-			}
+			} 
 			return $this->filePath;
-		}
-		
-		protected function setResult($success){
-			parent::setResult($success, "");
 		}
 		
 		public function getType(){

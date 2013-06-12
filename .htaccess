@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteRule ^/?mods index.php [L]
+RewriteRule ^/?downloads index.php [L]
 
 RewriteCond %{REQUEST_URI} !\.(js|ico|gif|jpg|jpeg|png|css)$ 
 RewriteCond %{REQUEST_FILENAME} !-d

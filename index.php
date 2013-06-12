@@ -1,6 +1,6 @@
 <?php
 	define("IN_API",	true);
-	error_reporting(0);
+	// error_reporting(0);
 	
 	header("Access-Control-Allow-Origin: *");
 	
@@ -98,11 +98,8 @@
 						}
 					} else if ($r->getType() == TYPE::DOWNLOAD){
 						if ($result[0]){
-							// first get the filepath, this is not directly in the readfile call
-							// because it can throw an exception.
-							$filePath = $r->getFilePath();
 							ob_end_flush();
-							readfile($filePath);
+							readfile($r->getFilePath());
 						} else {
 							header("Content-type: application/json");
 							echo json_encode(array("msg" => "fail", "data" => $result[1]));
