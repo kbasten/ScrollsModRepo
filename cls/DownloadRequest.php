@@ -9,13 +9,13 @@
 			if (!file_exists($this->filePath)){
 				// throwing an exception here prevents the content type from downloading the file
 				// which then only has the error in it
-				throw new ApiException(sprintf("Download file '%s' not found.", $this->filePath), 110);
+				throw new ApiException(sprintf("Download file '%s' not found.", $this->filePath), ErrorCode::E_FILE_NOT_FOUND);
 			}
 		}
 		
 		public function getFilePath(){
 			if ($this->filePath == ""){
-				throw new ApiException("Download file path not set.", 109);
+				throw new ApiException("Download file path not set.", ErrorCode::E_NO_FILE_LOCATION);
 			} 
 			return $this->filePath;
 		}
