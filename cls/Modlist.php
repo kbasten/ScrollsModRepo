@@ -7,6 +7,7 @@
 			// override the json_numeric_check, because it converts "1.0" to 1, 
 			// which is not wanted for mod versionCodes
 			$this->setJsonEncodeOption(0);
+			// this means we have to do manual casting though
 		}
 	
 		public function parseRequest($params){

@@ -18,7 +18,6 @@
 		
 		// loads the mustache render engine, this is not done for cached requests
 		final protected function loadMustache(){
-			// html needs Mustache :)
 			require_once "cls/includes/Mustache/Autoloader.php";
 			Mustache_Autoloader::register();
 			

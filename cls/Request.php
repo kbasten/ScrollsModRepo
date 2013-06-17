@@ -6,6 +6,8 @@
 		protected $result = "";
 		
 		private $opts = array(
+					"floodSeconds"	=> 6, // more than 10 requests in 6 seconds
+					"floodRequests"	=> 10,
 					"cacheEnabled"	=> true,
 					"cacheTTL"		=> 300 // cache everything for 5 minutes by default
 		);
@@ -31,6 +33,8 @@
 		// override if needed
 		protected function deformatCacheContent($input){ return $input;	}
 		
+		// looks in the cache and returns content if still valid, inserts
+		// new content otherwise.
 		public function processCache($params){
 			if ($this->getOption("cacheEnabled")){
 				// check the database for cache
@@ -38,13 +42,21 @@
 				
 				$cacheId = $this->getCacheId($params);
 				
+				// check whether cache is valid, and if so, retrieve content
+				// from the cache. Content is loaded into the cache with
+				// this call.
 				if ($c->isValid($cacheId)){
+					// parse cache content back from string to suitable object with
+					// deformatCacheContent method different for every request type
 					$this->setResult(true, $this->deformatCacheContent($c->getContent()));
 				} else {
+					// execute request like it would if there was no cache
 					$this->parseRequest($params);
 					
+					// format result into string for db storage
 					$cacheContent = $this->formatCacheContent($this->result);
 					
+					// save formatted result to cache
 					$c->save($cacheId, $cacheContent);
 				}
 			} else {
@@ -67,15 +79,7 @@
 		
 		final public function getResult(){
 			$msg = $this->result;
-			/*
-			if ($this->succeeded){
-				$msg = $this->result;
-			} else {
-				if ($this->getType() == TYPE::JSON){
-					$msg = $this->failMessage();
-				}
-			}
-			*/
+			
 			return array($this->succeeded, $msg);
 		}
 		
@@ -83,18 +87,16 @@
 			// check for flood (more than 10 requests in the last 6 seconds)
 			$sth = $this->getDB()->prepare("SELECT COUNT(*) AS r
 						FROM requests
-						WHERE time > UNIX_TIMESTAMP() - 6
+						WHERE time > UNIX_TIMESTAMP() - ?
 						AND ip = ?");
-			$sth->bindValue(1, $ip, PDO::PARAM_STR);
+			$sth->bindValue(1, $this->getOption("floodSeconds"), PDO::PARAM_INT);
+			$sth->bindValue(2, $ip, PDO::PARAM_STR);
 			$sth->execute();
 			
 			$requestCount = $sth->fetch(PDO::FETCH_ASSOC);
 			
-			if ($requestCount['r'] > 10){
-				return true;
-			} else {
-				return false;
-			}
+			// done more requests than allowed?
+			return $requestCount['r'] > $this->getOption("floodRequests");
 		}
 		
 		// default cache id function, doesn't work so well when the user

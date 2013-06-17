@@ -38,7 +38,7 @@
 			$sth->bindValue(2, $path);
 			$sth->execute();
 		
-			ob_end_flush(); // this seems to help with memory errors
+			ob_end_flush(); // this seems to help with out of memory errors
 			readfile($path);
 		}
 	}

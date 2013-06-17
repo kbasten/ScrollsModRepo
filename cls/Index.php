@@ -1,10 +1,6 @@
 <?php
 	class Index extends HTMLRequest {
 	
-		public function __construct(PDO $pdo){
-			parent::__construct($pdo);
-		}
-	
 		public function parseRequest($params){
 			$this->loadMustache();
 			

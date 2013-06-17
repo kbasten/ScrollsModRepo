@@ -6,6 +6,7 @@
 		public function __construct(PDO $pdo){
 			parent::__construct($pdo);
 			
+			// default json header :)
 			$this->setHeader("Content-type", "application/json");
 		}
 	
@@ -19,10 +20,12 @@
 			$this->jsonEncode = $option;
 		}
 
+		// converts array into string for database storage
 		final protected function formatCacheContent($in){
 			return json_encode($in, $this->getJsonEncodeOption());
 		}
 		
+		// converts string back to array, or it would be double escaped
 		final protected function deformatCacheContent($in){
 			return json_decode($in, true);
 		}
