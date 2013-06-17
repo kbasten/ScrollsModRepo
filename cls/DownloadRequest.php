@@ -20,14 +20,19 @@
 			return $this->filePath;
 		}
 		
-		public function getType(){
+		final public function getType(){
 			return TYPE::DOWNLOAD;
+		}
+		
+		// don't even allow downloads to have a cache, make it final :)
+		final public function canCache(){
+			return false;
 		}
 		
 		public function download(){
 			// log the download
 			$path = $this->getFilePath();
-			$sth = $this->pdo->prepare("INSERT INTO downloads (ip, filename, time)
+			$sth = $this->getDB()->prepare("INSERT INTO downloads (ip, filename, time)
 						VALUES (?, ?, UNIX_TIMESTAMP())");
 			$sth->bindValue(1, $_SERVER["REMOTE_ADDR"]);
 			$sth->bindValue(2, $path);

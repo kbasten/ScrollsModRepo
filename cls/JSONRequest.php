@@ -9,7 +9,7 @@
 			$this->setHeader("Content-type", "application/json");
 		}
 	
-		public function getType(){
+		final public function getType(){
 			return TYPE::JSON;
 		}
 		
@@ -19,6 +19,14 @@
 			$this->jsonEncode = $option;
 		}
 
+		final protected function formatCacheContent($in){
+			return json_encode($in, $this->getJsonEncodeOption());
+		}
+		
+		final protected function deformatCacheContent($in){
+			return json_decode($in, true);
+		}
+		
 		public function getJsonEncodeOption(){
 			return $this->jsonEncode;
 		}

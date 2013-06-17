@@ -1,6 +1,6 @@
 <?php
-	define("IN_API",	true);
-	// error_reporting(0);
+	define("IN_API", true);
+	error_reporting(0);
 	
 	header("Access-Control-Allow-Origin: *");
 	
@@ -43,21 +43,11 @@
 				
 				require_once $pathToModule;
 				
-				// check for flood (more than 10 requests in the last 6 seconds)
-				$sth = $pdo->prepare("SELECT COUNT(*) AS r
-							FROM requests
-							WHERE time > UNIX_TIMESTAMP() - 6
-							AND ip = ?");
-				$sth->bindValue(1, $_SERVER['REMOTE_ADDR'], PDO::PARAM_STR);
-				$sth->execute();
-				
-				$requestCount = $sth->fetch(PDO::FETCH_ASSOC);
-				
-				if ($requestCount['r'] > 10){
+				$r = new $className($pdo);
+					
+				if ($r->isFlooding($_SERVER["REMOTE_ADDR"])){
 					throw new ApiException("Rate limit exceeded.", ErrorCode::E_RATE_LIM_EXCEEDED);
 				} else {
-					$r = new $className($pdo);
-					
 					$params = array();
 					
 					for ($i = 0; $i < count($urlParts); $i++){
@@ -68,8 +58,11 @@
 						$params[$key] = urldecode($p);
 					}
 					
-					$r->parseRequest($params);
-					
+					if ($r->canCache()){
+						$r->processCache($params);
+					} else {
+						$r->parseRequest($params);
+					}
 					$result = $r->getResult();
 					
 					// add headers for different content types etc.
@@ -92,7 +85,7 @@
 						echo json_encode($out, $r->getJsonEncodeOption());
 					} else if ($r->getType() == TYPE::HTML){
 						if ($result[0]){
-							echo $r->getHTMLContent();
+							echo $result[1];
 						} else {
 							echo $r->p404();
 						}

@@ -58,7 +58,7 @@
 				// no need to set a user-friendly name here, this is only called by 
 				// the framework from in-game, no browser interaction
 			} else if ($fields['url_1'] == "mod"){
-				$sth = $this->pdo->prepare("SELECT name, id, version
+				$sth = $this->getDB()->prepare("SELECT name, id, version
 							FROM mods
 							WHERE identifier = ?");
 				$sth->bindValue(1, $fields['url_2'], PDO::PARAM_STR);
@@ -70,7 +70,7 @@
 					// mod does not exist
 					$this->setResult(false, "Download does not exist.");
 				} else {
-					$sth = $this->pdo->prepare("UPDATE mods
+					$sth = $this->getDB()->prepare("UPDATE mods
 								SET downloads = downloads + 1
 								WHERE id = ?");
 					$sth->bindValue($mod['id'], PDO::PARAM_INT);

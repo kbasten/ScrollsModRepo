@@ -1,0 +1,28 @@
+<div id="intro">
+	Welcome to the {{ REPONAME }} hosted Mod Repository for Summoner : Modloader for Scrolls.
+	Here you will find an overview of the available mods in this repository, with their 
+	functionality and requirements. Installing mods from this repository is done in-game.
+	Add this repository to Summoner by adding the following url in-game: <br /><br />
+	<code>{{ REPOURL }}</code>
+	<br /><br />
+	Summoner : Modloader for Scrolls can be downloaded from the <a href="http://www.scrollsguide.com/summoner">Summoner page on Scrollsguide</a>.
+</div>
+{{# MODS }}
+	<div class="item">
+		<h3>{{ NAME }} : {{ DESC }}</h3>
+		<div class="desc">
+			{{ LONGDESC }}
+		</div>
+		<table class="desctable">
+			<tr>
+				<td style="width: 150px;"><b>Opensource link:</b></td>
+				<td><a href="{{ OPENSOURCE }}" target="_blank"><code>{{ OPENSOURCE }}</code></a></td>
+			</tr>
+			<tr>
+				<td><b>Version:</b></td>
+				<td>{{ VCODE }}, last updated {{ LASTUPDATE }}</td>
+			</tr>
+		</table>
+	</div>
+	<hr />
+{{/ MODS }}

@@ -10,7 +10,7 @@
 		}
 	
 		public function parseRequest($params){
-			$sth = $this->pdo->prepare("SELECT identifier AS id, name, description, version, versionCode
+			$sth = $this->getDB()->prepare("SELECT identifier AS id, name, description, version, versionCode, downloads
 						FROM mods
 						ORDER BY name DESC");
 			$sth->execute();
@@ -22,7 +22,8 @@
 							'name'			=> $mod['name'],
 							'description'	=> $mod['description'],
 							'version'		=> (int)$mod['version'], // cast needed because json_numeric_check is disabled
-							'versionCode'	=> $mod['versionCode']
+							'versionCode'	=> $mod['versionCode'],
+							'downloads'		=> (int)$mod['downloads']
 				);
 				
 				$modList[] = $newMod;

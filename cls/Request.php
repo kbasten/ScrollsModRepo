@@ -1,11 +1,14 @@
 <?php
 	abstract class Request {
 	
-		protected $pdo; // mod database
+		private $pdo; // mod database
 		private $succeeded = false;
 		protected $result = "";
 		
-		protected $type;
+		private $opts = array(
+					"cacheEnabled"	=> true,
+					"cacheTTL"		=> 300 // cache everything for 5 minutes by default
+		);
 		
 		private $headers = array();
 		
@@ -17,20 +20,52 @@
 		
 		public abstract function getType(); // one of the TYPE enums
 		
-		protected function setResult($success, $result){
+		// override if needed
+		public function canCache(){
+			return true;
+		}
+		
+		// override if needed
+		protected function formatCacheContent($input){ return $input; }
+		
+		// override if needed
+		protected function deformatCacheContent($input){ return $input;	}
+		
+		public function processCache($params){
+			if ($this->getOption("cacheEnabled")){
+				// check the database for cache
+				$c = new Cache($this);
+				
+				$cacheId = $this->getCacheId($params);
+				
+				if ($c->isValid($cacheId)){
+					$this->setResult(true, $this->deformatCacheContent($c->getContent()));
+				} else {
+					$this->parseRequest($params);
+					
+					$cacheContent = $this->formatCacheContent($this->result);
+					
+					$c->save($cacheId, $cacheContent);
+				}
+			} else {
+				$this->parseRequest($params);
+			}
+		}
+		
+		final protected function setResult($success, $result){
 			$this->succeeded = $success;
 			$this->result = $result;
 		}
 		
-		protected function setHeader($id, $content){
+		final protected function setHeader($id, $content){
 			$this->headers[$id] = $content;
 		}
 		
-		public function getHeaders(){
+		final public function getHeaders(){
 			return $this->headers;
 		}
 		
-		public function getResult(){
+		final public function getResult(){
 			$msg = $this->result;
 			/*
 			if ($this->succeeded){
@@ -42,6 +77,48 @@
 			}
 			*/
 			return array($this->succeeded, $msg);
+		}
+		
+		public function isFlooding($ip){
+			// check for flood (more than 10 requests in the last 6 seconds)
+			$sth = $this->getDB()->prepare("SELECT COUNT(*) AS r
+						FROM requests
+						WHERE time > UNIX_TIMESTAMP() - 6
+						AND ip = ?");
+			$sth->bindValue(1, $ip, PDO::PARAM_STR);
+			$sth->execute();
+			
+			$requestCount = $sth->fetch(PDO::FETCH_ASSOC);
+			
+			if ($requestCount['r'] > 10){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		// default cache id function, doesn't work so well when the user
+		// starts adding random parameters
+		protected function getCacheId($params){
+			// first sort params by key
+			ksort($params);
+			
+			// then make a query string from the thing and hash it, key done! :)
+			// as mentioned, key differs with random user-added parameters
+			
+			return md5(http_build_query($params));		
+		}
+		
+		final public function setOption($key, $value){
+			$this->opts[$key] = $value;
+		}
+		
+		final public function getOption($key){
+			return $this->opts[$key];
+		}
+		
+		public function getDB(){
+			return $this->pdo;
 		}
 	}
 	

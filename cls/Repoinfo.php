@@ -5,7 +5,7 @@
 	class Repoinfo extends JSONRequest {
 	
 		public function parseRequest($params){
-			$sth = $this->pdo->prepare("SELECT COUNT(*) AS c
+			$sth = $this->getDB()->prepare("SELECT COUNT(*) AS c
 						FROM mods");
 			$sth->execute();
 			
