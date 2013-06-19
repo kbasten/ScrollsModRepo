@@ -19,12 +19,12 @@
 			$modList = array();
 			while ($mod = $sth->fetch(PDO::FETCH_ASSOC)){
 				$newMod = array(
-							'id'			=> $mod['id'],
-							'name'			=> $mod['name'],
-							'description'	=> $mod['description'],
-							'version'		=> (int)$mod['version'], // cast needed because json_numeric_check is disabled
-							'versionCode'	=> $mod['versionCode'],
-							'downloads'		=> (int)$mod['downloads']
+							"id"			=> $mod["id"],
+							"name"			=> $mod["name"],
+							"description"	=> $mod["description"],
+							"version"		=> (int)$mod["version"], // cast needed because json_numeric_check is disabled
+							"versionCode"	=> $mod["versionCode"],
+							"downloads"		=> (int)$mod["downloads"]
 				);
 				
 				$modList[] = $newMod;
@@ -32,5 +32,9 @@
 
 			// this method doesn't return false, in case of a failure/empty resultset the result is just an empty array
 			$this->setResult(true, $modList);
+		}
+		
+		public function getCacheId($params){
+			return "modlist";
 		}
 	}

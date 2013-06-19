@@ -1,9 +1,9 @@
 <?php
 	abstract class HTMLRequest extends Request {
 	
-		private $c404 = "That's an error. Page not found.";
+		private $c404;
 	
-		protected $m;
+		protected $m = null;
 		
 		private $baseTpl;
 		protected $title = "Summoner Mod Repository";
@@ -22,7 +22,7 @@
 			Mustache_Autoloader::register();
 			
 			$this->m = new Mustache_Engine(array(
-						"loader"	=> new Mustache_Loader_FilesystemLoader("tpl/html/")
+						"loader" => new Mustache_Loader_FilesystemLoader("tpl/html/")
 			));
 			$this->baseTpl = $this->m->loadTemplate("base");
 		}
@@ -36,19 +36,31 @@
 			return $in;
 		}
 		
-		protected function set404($c404){
+		protected function set404($c404 = "That's an error. Page not found."){
 			$this->c404 = $c404;
+			
+			parent::setResult(false, "");
 		}
 		
 		public function p404(){
-			return $this->c404;
+			// no need to check whether baseTpl is null because that 
+			// can't happen without m being null
+			if ($this->m == null){
+				$this->loadMustache();
+			}
+			
+			return $this->baseTpl->render(array(
+						"TITLE"		=> "404 - Page not found",
+						"PHEADER"	=> "Page not found",
+						"CONTENT"	=> $this->c404
+			));
 		}
 		
 		public function getHTMLContent($pageContent){
 			return $this->baseTpl->render(array(
-				"TITLE"		=> $this->title,
-				"PHEADER"	=> $this->pageHeader,
-				"CONTENT"	=> $pageContent
+						"TITLE"		=> $this->title,
+						"PHEADER"	=> $this->pageHeader,
+						"CONTENT"	=> $pageContent
 			));
 		}
 		

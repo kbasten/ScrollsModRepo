@@ -51,7 +51,11 @@
 						}
 					}
 				} else {
-					$value = preg_replace($r['replace'], "", $params[$r['key']]);
+					if (isset($r['replace'])){
+						$value = preg_replace($r['replace'], "", $params[$r['key']]);
+					} else {
+						$value = $params[$r['key']];
+					}
 					if (isset($r['max'])){
 						if ($value > $r['max']){
 							throw new ApiException("Maximum value for '" . $r['key'] . "' exceeded; maximum is " . $r['max'] . ".", 

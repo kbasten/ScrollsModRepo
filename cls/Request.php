@@ -69,6 +69,7 @@
 			$this->result = $result;
 		}
 		
+		// adds header to the request
 		final protected function setHeader($id, $content){
 			$this->headers[$id] = $content;
 		}
@@ -87,20 +88,20 @@
 			// check for flood (more than 10 requests in the last 6 seconds)
 			$sth = $this->getDB()->prepare("SELECT COUNT(*) AS r
 						FROM requests
-						WHERE time > UNIX_TIMESTAMP() - ?
-						AND ip = ?");
-			$sth->bindValue(1, $this->getOption("floodSeconds"), PDO::PARAM_INT);
-			$sth->bindValue(2, $ip, PDO::PARAM_STR);
+						WHERE time > UNIX_TIMESTAMP() - :seconds
+						AND ip = :ip");
+			$sth->bindValue(":seconds", $this->getOption("floodSeconds"), PDO::PARAM_INT);
+			$sth->bindValue(":ip", $ip, PDO::PARAM_STR);
 			$sth->execute();
 			
 			$requestCount = $sth->fetch(PDO::FETCH_ASSOC);
 			
 			// done more requests than allowed?
-			return $requestCount['r'] > $this->getOption("floodRequests");
+			return $requestCount["r"] > $this->getOption("floodRequests");
 		}
 		
 		// default cache id function, doesn't work so well when the user
-		// starts adding random parameters
+		// starts adding random parameters, so override this if possible
 		protected function getCacheId($params){
 			// first sort params by key
 			ksort($params);

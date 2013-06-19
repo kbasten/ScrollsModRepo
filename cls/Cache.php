@@ -15,10 +15,10 @@
 		public function isValid($id){
 			$sth = $this->r->getDB()->prepare("SELECT content
 						FROM cache
-						WHERE id = ?
-						AND cachetime + ? > UNIX_TIMESTAMP()");
-			$sth->bindValue(1, $id, PDO::PARAM_STR);
-			$sth->bindValue(2, $this->r->getOption("cacheTTL"), PDO::PARAM_INT);
+						WHERE id = :id
+						AND cachetime + :time > UNIX_TIMESTAMP()");
+			$sth->bindValue(":id", $id, PDO::PARAM_STR);
+			$sth->bindValue(":time", $this->r->getOption("cacheTTL"), PDO::PARAM_INT);
 			
 			$sth->execute();
 			
@@ -38,11 +38,10 @@
 		// saves content to cache and overwrites old values
 		public function save($id, $content){
 			$sth = $this->r->getDB()->prepare("INSERT INTO cache (id, cachetime, content)
-						VALUES (?, UNIX_TIMESTAMP(), ?)
-						ON DUPLICATE KEY UPDATE cachetime = UNIX_TIMESTAMP(), content = ?");
-			$sth->bindValue(1, $id, PDO::PARAM_STR);
-			$sth->bindValue(2, $content, PDO::PARAM_STR);
-			$sth->bindValue(3, $content, PDO::PARAM_STR);
+						VALUES (:id, UNIX_TIMESTAMP(), :content)
+						ON DUPLICATE KEY UPDATE cachetime = UNIX_TIMESTAMP(), content = :content");
+			$sth->bindValue(":id", $id, PDO::PARAM_STR);
+			$sth->bindValue(":content", $content, PDO::PARAM_STR);
 			
 			$sth->execute();
 		}
@@ -50,8 +49,8 @@
 		// removes an item from the cache
 		public function clear($id){
 			$sth = $this->r->getDB()->prepare("DELETE FROM cache
-						WHERE id = ?");
-			$sth->bindValue(1, $id, PDO::PARAM_STR);
+						WHERE id = :id");
+			$sth->bindValue(":id", $id, PDO::PARAM_STR);
 			
 			$sth->execute();
 		}

@@ -1,6 +1,12 @@
 <?php
 	class Index extends HTMLRequest {
 	
+		public function __construct(PDO $pdo){
+			parent::__construct($pdo);
+			
+			// $this->setOption("cacheEnabled", false);
+		}
+	
 		public function parseRequest($params){
 			$this->loadMustache();
 			
@@ -18,12 +24,13 @@
 			$modList = array();
 			while ($mod = $sth->fetch(PDO::FETCH_ASSOC)){
 				$modList[] = array(
-							"NAME"		=> $mod['name'],
-							"DESC"		=> $mod['description'],
-							"LONGDESC"	=> $mod['longdesc'],
-							"OPENSOURCE"=> $mod['opensource'],
-							"VCODE"		=> $mod['versionCode'],
-							"LASTUPDATE"=> date("M jS Y", $mod['lastUpdate'])
+							"IDENTIFIER"=> $mod["identifier"],
+							"NAME"		=> $mod["name"],
+							"DESC"		=> $mod["description"],
+							"LONGDESC"	=> $mod["longdesc"],
+							"OPENSOURCE"=> $mod["opensource"],
+							"VCODE"		=> $mod["versionCode"],
+							"LASTUPDATE"=> date("M jS Y", $mod["lastUpdate"])
 				);
 			}
 			
@@ -34,5 +41,9 @@
 			));
 		
 			$this->setResult(true, $this->getHTMLContent($fullPage));
+		}
+		
+		public function getCacheId($params){
+			return "index";
 		}
 	}

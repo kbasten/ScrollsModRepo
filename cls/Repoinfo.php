@@ -11,10 +11,7 @@
 			
 			$result = $sth->fetch(PDO::FETCH_ASSOC);
 			
-			$modsInRepo = 0;
-			if (!empty($result)){
-				$modsInRepo = $result['c'];
-			}
+			$modsInRepo = !empty($result) ? $result["c"] : 0;
 			
 			$this->setResult(true, array(
 						"name" 	=> REPO_NAME, 
@@ -22,5 +19,9 @@
 						"version"	=> 1,
 						"mods" 	=> $modsInRepo
 			));
+		}
+		
+		public function getCacheId($params){
+			return "repoinfo";
 		}
 	}

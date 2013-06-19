@@ -7,9 +7,9 @@
 	
 		public function __toString(){
 			$out = array(
-				"msg"	=> "exception",
-				"code"	=> $this->getCode(),
-				"exception" => $this->getMessage()
+						"msg" => "exception",
+						"code" => $this->getCode(),
+						"exception" => $this->getMessage()
 			);
 			return json_encode($out, JSON_NUMERIC_CHECK);
 		}

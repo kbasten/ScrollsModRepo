@@ -1,10 +1,10 @@
 <?php
 	define("IN_API", true);
-	error_reporting(0);
+	// error_reporting(0);
 	
 	header("Access-Control-Allow-Origin: *");
 	
-	// set the correct ip for cloudflare system, currently disabled
+	// set the correct ip for cloudflare system
 	$_SERVER["REMOTE_ADDR"] = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : $_SERVER["REMOTE_ADDR"]; 
 	require_once "config.php";
 	
@@ -84,11 +84,7 @@
 							
 						echo json_encode($out, $r->getJsonEncodeOption());
 					} else if ($r->getType() == TYPE::HTML){
-						if ($result[0]){
-							echo $result[1];
-						} else {
-							echo $r->p404();
-						}
+						echo $result[0] ? $result[1] : $r->p404();
 					} else if ($r->getType() == TYPE::DOWNLOAD){
 						if ($result[0]){
 							$r->download();
@@ -115,11 +111,11 @@
 	}
 	
 	$sth = $pdo->prepare("INSERT INTO requests (ip, time, request, msg, success, exectime)
-				VALUES (?, UNIX_TIMESTAMP(), ?, ?, ?, ?)");
-	$sth->bindValue(1, $_SERVER['REMOTE_ADDR'], PDO::PARAM_STR);
-	$sth->bindValue(2, $_SERVER['REQUEST_URI'], PDO::PARAM_STR);
-	$sth->bindValue(3, $msg, PDO::PARAM_STR);
-	$sth->bindValue(4, $result[0] ? 1 : 0, PDO::PARAM_INT);
-	$sth->bindValue(5, $executionTime, PDO::PARAM_INT);
+				VALUES (:ip, UNIX_TIMESTAMP(), :request, :msg, :success, :time)");
+	$sth->bindValue(":ip", $_SERVER["REMOTE_ADDR"], PDO::PARAM_STR);
+	$sth->bindValue(":request", $_SERVER["REQUEST_URI"], PDO::PARAM_STR);
+	$sth->bindValue(":msg", $msg, PDO::PARAM_STR);
+	$sth->bindValue(":success", $result[0] ? 1 : 0, PDO::PARAM_INT);
+	$sth->bindValue(":time", $executionTime, PDO::PARAM_INT);
 	$sth->execute();
 	$pdo = null;
