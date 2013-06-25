@@ -6,8 +6,8 @@
 		protected $result = "";
 		
 		private $opts = array(
-					"floodSeconds"	=> 6, // more than 10 requests in 6 seconds
-					"floodRequests"	=> 10,
+					"floodSeconds"	=> 6, // more than 20 requests in 6 seconds
+					"floodRequests"	=> 20,
 					"cacheEnabled"	=> true,
 					"cacheTTL"		=> 300 // cache everything for 5 minutes by default
 		);

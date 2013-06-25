@@ -1,7 +1,7 @@
 <?php
 	abstract class HTMLRequest extends Request {
 	
-		private $c404;
+		private $c404 = "That's an error. Page not found.";
 	
 		protected $m = null;
 		
@@ -18,11 +18,11 @@
 		
 		// loads the mustache render engine, this is not done for cached requests
 		final protected function loadMustache(){
-			require_once "cls/includes/Mustache/Autoloader.php";
+			require_once "../cls/includes/Mustache/Autoloader.php";
 			Mustache_Autoloader::register();
 			
 			$this->m = new Mustache_Engine(array(
-						"loader" => new Mustache_Loader_FilesystemLoader("tpl/html/")
+						"loader" => new Mustache_Loader_FilesystemLoader("../tpl/html/")
 			));
 			$this->baseTpl = $this->m->loadTemplate("base");
 		}
@@ -36,8 +36,8 @@
 			return $in;
 		}
 		
-		protected function set404($c404 = "That's an error. Page not found."){
-			$this->c404 = $c404;
+		protected function set404($c404 = null){
+			$this->c404 = $c404 != null ? $c404 : $this->c404;
 			
 			parent::setResult(false, "");
 		}

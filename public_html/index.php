@@ -2,14 +2,14 @@
 	define("IN_API", true);
 	// error_reporting(0);
 	
+	// keep track of execution time for logging later on
+	$startTime = microtime(true);
+	
 	header("Access-Control-Allow-Origin: *");
 	
 	// set the correct ip for cloudflare system
 	$_SERVER["REMOTE_ADDR"] = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : $_SERVER["REMOTE_ADDR"]; 
-	require_once "config.php";
-	
-	// keep track of execution time for logging later on
-	$startTime = microtime(true);
+	require_once "../config.php";
 	
 	$url = strtok($_SERVER["REQUEST_URI"], "?");
 	
@@ -26,7 +26,7 @@
 		$className = "Index";
 	}
 	
-	$pathToModule = sprintf("cls/%s.php", $className);
+	$pathToModule = sprintf("../cls/%s.php", $className);
 	
 	$result = array(false);
 	$msg = "";
@@ -35,11 +35,11 @@
 	$pdo = new PDO(sprintf("mysql:host=%s;dbname=%s", DB_HOST, DB_NAME), DB_USER, DB_PASS);
 	try {
 		try {
-			require_once "cls/ApiException.php";
+			require_once "../cls/ApiException.php";
 			// check whether this class exists and throw an exception otherwise
 			if (file_exists($pathToModule)){
-				require_once "cls/Util.php";
-				require_once "cls/Request.php";
+				require_once "../cls/Util.php";
+				require_once "../cls/Request.php";
 				
 				require_once $pathToModule;
 				

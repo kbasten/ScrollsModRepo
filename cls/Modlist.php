@@ -13,7 +13,8 @@
 		public function parseRequest($params){
 			$sth = $this->getDB()->prepare("SELECT identifier AS id, name, description, version, versionCode, downloads
 						FROM mods
-						ORDER BY name DESC");
+						WHERE available = 1
+						ORDER BY lastupdate DESC");
 			$sth->execute();
 			
 			$modList = array();

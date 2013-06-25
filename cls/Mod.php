@@ -18,7 +18,7 @@
 			$fields = Util::getRequired($params, $required);
 		
 			$sth = $this->getDB()->prepare("SELECT name, description, longdesc, versionCode, downloads,
-									devname, opensource, lastUpdate
+									bugs, devname, opensource, lastUpdate
 						FROM mods
 						WHERE identifier = :id");
 			$sth->bindValue(":id", $fields["url_1"], PDO::PARAM_STR);
@@ -40,6 +40,7 @@
 							"VCODE"			=> $mod["versionCode"],
 							"LASTUPDATE"	=> date("M jS Y", $mod["lastUpdate"]),
 							"DOWNLOADS"		=> $mod["downloads"],
+							"BUGS"			=> $mod["bugs"] != "" ? $mod["bugs"] : "None",
 							"REPONAME"		=> REPO_NAME
 				));
 			

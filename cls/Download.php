@@ -23,13 +23,13 @@
 			$platformConfig = array(
 						"windows"	=> 
 							array(
-								"extension"	=> "exe",
-								"type"		=> "application/x-msdos-program"
+								"extension"	=> "zip",
+								"type"		=> "application/zip" // x-msdos-program
 							),
 						"mac"		=> 
 							array(
-								"extension"	=> "dmg",
-								"type"		=> "application/x-apple-diskimage"
+								"extension"	=> "zip",
+								"type"		=> "application/zip" // x-apple-diskimage
 							)
 			);
 			
@@ -45,7 +45,7 @@
 				
 				$this->setResult(true, "");
 				
-				$this->setFilePath(sprintf("downloads/%s/%d/installer.%s", $platform, Version::$version, $platformConfig[$platform]["extension"]));
+				$this->setFilePath(sprintf("../downloads/%s/%d/installer.%s", $platform, Version::$version, $platformConfig[$platform]["extension"]));
 				$this->setHeader("Content-type", $platformConfig[$platform]["type"]);
 				
 				// display a more user-friendly name instead of installer.exe/dmg
@@ -53,11 +53,11 @@
 			} else if ($fields["url_1"] == "update"){
 				$this->setResult(true, "");
 			
-				$this->setFilePath(sprintf("downloads/update/%d/updater.exe", Version::$version));
+				$this->setFilePath(sprintf("../downloads/update/%d/updater.exe", Version::$version));
 				$this->setHeader("Content-type", "application/x-msdos-program");
 				// no need to set a user-friendly name here, this is only called by 
 				// the framework from in-game, no browser interaction
-			} else if ($fields["url_1"] == "mod"){
+			} else if ($fields["url_1"] == "mod"){			
 				$sth = $this->getDB()->prepare("SELECT name, id, version
 							FROM mods
 							WHERE identifier = :id");
@@ -79,7 +79,7 @@
 					$this->setResult(true, "");
 					
 					// single quotes because $s shouldn't be evaluated :)
-					$this->setFilePath(sprintf('downloads/mods/%1$s/%2$d/%1$s.mod.dll', $mod["name"], $mod["version"]));
+					$this->setFilePath(sprintf('../downloads/mods/%1$s/%2$d/%1$s.mod.dll', $mod["name"], $mod["version"]));
 					
 					// add header for dll files
 					$this->setHeader("Content-type", "application/x-msdos-program");
