@@ -1,12 +1,6 @@
 <?php
 	class Mod extends HTMLRequest {
 	
-		public function __construct(PDO $pdo){
-			parent::__construct($pdo);
-			
-			// $this->setOption("cacheEnabled", false);
-		}
-	
 		public function parseRequest($params){
 			$required = array(
 				array(

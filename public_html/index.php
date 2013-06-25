@@ -51,7 +51,7 @@
 					$params = array();
 					
 					for ($i = 0; $i < count($urlParts); $i++){
-						$params['url_' . $i] = $urlParts[$i];
+						$params["url_" . $i] = $urlParts[$i];
 					}
 					
 					foreach ($_GET as $key => $p){

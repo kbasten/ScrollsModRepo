@@ -60,6 +60,7 @@
 					$c->save($cacheId, $cacheContent);
 				}
 			} else {
+				// caching is not enabled, just parse the request
 				$this->parseRequest($params);
 			}
 		}
