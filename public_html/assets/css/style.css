@@ -1,0 +1,304 @@
+/**********************************/
+/*          To Kabasten           */
+/*          <3 Elystus            */
+/**********************************/
+
+/**** Setup :) ****/
+/* Getting rid of browser defaults */
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+*:focus {
+    border: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+/**** Typography ****/
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+}
+
+h1 { font-size: 32px; line-height: 56px; }
+
+h2{ font-size: 24px; line-height: 38px; }
+
+h3 { font-size: 20px; line-height: 28px; }
+
+h4 { font-size: 18px; line-height: 20px; }
+
+h5 { font-size: 13px; line-height: 16px;}
+
+h6 { font-size: 11px; }
+
+
+/* Links */
+a {
+    color: #504232;
+    text-decoration: none;
+}
+
+a:hover {
+   color: #B98C37;
+}
+
+a, a:hover {
+  transition: color .2s, background .2s;
+  -moz-transition: color .2s, background .2s;
+  -webkit-transition: color .2s, background .2s;
+  -o-transition: color .2s, background .2s;
+}
+
+
+/**** General CSS ****/
+body {
+    font-family: 'lucida grande', tahoma ,verdana, arial, sans-serif;
+    background-image: url('/assets/img/background.png');
+    background-repeat: repeat;
+    margin: auto;
+    color: #504232;
+    font-size: 14px;
+    /* Fixing ie centering bug */
+    text-align:center;
+}
+
+.wrapper {
+    width: 960px;
+    background-color: #E7D7C0;
+    text-align: left;
+    margin: 0px auto 50px auto;
+    border-radius: 0px 0px 8px 8px;
+    box-shadow: 0px 8px 20px #000000;
+}
+
+.ribbon {
+    background-color: #3E312A;
+}
+
+.container {
+    padding: 0px 20px;
+}
+
+/** Header **/
+.header {
+    padding-top: 45px;
+    color: #A59685;
+   
+}
+
+/* .header .title { } */
+
+.header .menu {
+    float: right;
+    padding-right: 20px;
+}
+
+.header .menu a {
+    font-size: 20px;
+    line-height: 56px;
+    color: #A59685;
+}
+
+.header .menu a:hover {
+    color: #B9934C;
+}
+
+/** Footer **/
+.footer {
+    padding: 15px;
+}
+
+.footer .ribbon {
+    border-radius: 4px;
+}
+
+.footer ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+.footer ul {
+    list-style: none;
+    display: table;
+    border-spacing: 4px;
+    width: 100%;
+    text-align: center;
+}
+
+.footer li {
+    display: table-cell;
+}
+
+.footer a {
+    font-size: 12px;
+    color: #9D8E7E;
+}
+
+.footer a:hover {
+    color: #A98758;
+}
+
+/** Content **/
+.content {
+    padding: 20px 10px;
+}
+
+/* Intro */
+.content .intro {
+    font-size: 16px;
+    line-height: 18px;
+    padding: 0px 0px 10px;
+}
+
+.content .intro p {
+    padding: 20px 0px;
+}
+
+.content .intro code {
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 3px;
+    color: #B98C37;
+    margin: 0px 30px;
+}
+
+/* Mod List */
+.list {
+    padding: 0px 20px;
+}
+
+.list .mod:first-child {
+    padding: 0px 0px 10px 0px;
+}
+
+.list .mod {
+    padding: 10px 0px;
+}
+
+.list .mod .title {
+    background: #A98758;
+    color: #E7D7C0;
+    padding: 4px 10px;
+}
+
+.list .mod .title a {
+    color: #E7D7C0;
+}
+
+.list .mod .title a:hover {
+    color: #FFBC66;
+}
+
+.list .mod .title small {
+    font-size: 16px;
+}
+
+.list .mod .info {
+    padding: 15px 20px 0px 20px;
+    line-height: 18px;
+}
+
+.source {
+    padding: 10px 15px;
+}
+
+.source .left {
+    display: inline-block;
+    font-weight: bold;
+    text-align: right;
+}
+
+.source .right {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/**** Specific Styling ****/
+.single-mod {
+    padding: 5px 10px;
+}
+
+.single-mod .title {
+    padding: 10px 20px ;
+}
+
+.single-mod .info {
+    padding:  0px 20px; 
+}
+
+.single-mod .source {
+    padding: 10px 20px 0px; 
+}
+
+.submit {
+    margin: 10px 20px;
+}
+
+.submit .title h3 {
+    font-size: 18px;
+}
+
+.submit .submit-form {
+    margin: 10px 20px;
+}
+
+.submit .submit-form div {
+    width: 100%;
+}
+
+/* Labels */
+.submit .submit-form label {
+    font-size: 15px;
+    line-height: 22px;
+}
+
+/* Text Boxes */
+.submit .submit-form input[type=text] {
+    margin: 5px 0px;
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid #504232;
+    border-radius: 3px;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+    vertical-align: middle;
+}
+
+submit .submit-form input[type=text]:focus {
+    border-color: #FEB62F;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(254,182,47,0.5);
+}
+
+/* Submit Button */
+.submit .submit-form input[type=submit] {
+    margin: 10px 0px;
+    width: 200px;
+    border-radius: 3px;
+    background-image: -moz-linear-gradient(#fafafa, #dadada);
+    background-image: -webkit-linear-gradient(#fafafa, #dadada);
+    background-image: linear-gradient(#fafafa, #dadada);
+    background-repeat: repeat-x;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid #ccc;
+    padding: 5px 0px;
+}
+
+.submit .submit-form input[type=submit]:hover {
+    background-color: #dadada;
+    background-image: none;
+    border-color: #ccc #ccc #b5b5b5;
+}
