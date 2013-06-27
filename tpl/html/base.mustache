@@ -1,10 +1,42 @@
 <html>
-	<head>
-		<title>{{ TITLE }}</title>
-		<link rel="stylesheet" type="text/css" href="/css/style.css" />
-	</head>
-	<body>
-		<h1>{{ PHEADER }}</h1>
-		{{{ CONTENT }}}
-	</body>
+    <head>
+        <title>{{ TITLE }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+        <!--[if lt IE 9]>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="ribbon">
+                    <div class="container">
+                        <div class="menu">
+                            <a href="/submit">Submit</a>
+                        </div>
+                        <div class="title">
+                            <h1>{{ PHEADER }}</h1>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="content">
+                    {{{ CONTENT }}}
+                </div>
+            </div>    
+            <div class="footer">
+                <div class="ribbon">
+                    <div class="container">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/submit">Submit</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
