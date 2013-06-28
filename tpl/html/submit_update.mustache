@@ -1,0 +1,37 @@
+<div id="intro">
+	Update a mod you have submitted to the {{ REPONAME }} hosted Mod Repository for Summoner : Modloader for Scrolls
+	on this page. All you have to do is submit a new version code, your mod will be added to the review queue and you
+	will be notified of its status. All fields are required!
+</div>
+<div class="submit">
+	<div class="title">
+		<h3>Fill out the fields below: <h3>
+	</div>
+	<div class="submit-form">
+		<form method="POST" action="/cp/update">
+			<div>
+				<label for="mod-name">Mod Name (name of the mod to update, exact match):</label>
+				<input type="text" id="mod-name" name="mod-name" placeholder="MyAwesomeMod" />
+			</div>
+			<div>
+				<label for="mod-author-email">Mod Author Email (the email you used when you submitted the mod):</label>
+				<input type="text" id="mod-author-email" name="mod-author-email" placeholder="example@example.com" />
+			</div>
+			<div>
+				<label for="mod-token">Mod Token (the token you used when you submitted the mod):</label>
+				<input type="password" id="mod-token" name="mod-token" placeholder="MyPassword" />
+			</div>
+			<div>
+				<label for="mod-version">Mod Version Code (new version code for the mod, max length 5 characters):</label>
+				<input type="text" id="mod-version" name="mod-version" placeholder="1.2" maxlength="5" />
+			</div>
+			<div>
+				<label for="mod-new">What's New (little bit of information about this update):</label>
+				<textarea id="mod-new" name="mod-new"></textarea>
+			</div>
+			<div>
+				<input type="submit" value="Submit" />
+			</div>
+		</form>
+	</div>
+</div>

@@ -4,15 +4,16 @@
 	finished reviewing your mod, it will be added to this repository, making it available to every
 	player using this repository to download mods for Summoner. Please don't submit mods more than
 	once - when it's submitted, people running this repository have received it and will begin reviewing
-	it shortly. When your mod is accepted into this repository, you will receive information on how to
-	submit updates for your mod. All fields are required!
+	it shortly. When your mod is accepted into this repository, you will receive a notice. When you 
+	want to submit an update for your mod, please go to the <a href="/cp/update">update page</a>.
+	All fields are required!
 </div>
 <div class="submit">
 	<div class="title">
 		<h3>Fill out the fields below: <h3>
 	</div>
 	<div class="submit-form">
-		<form method="POST" action="/submit">
+		<form method="POST" action="/cp/submit">
 			<div>
 				<label for="mod-name">Mod Name (no spaces):</label>
 				<input type="text" id="mod-name" name="mod-name" placeholder="MyAwesomeMod" />
@@ -26,27 +27,27 @@
 				<input type="text" id="mod-author-email" name="mod-author-email" placeholder="example@example.com" />
 			</div>
 			<div>
-				<label for="mod-token">Mod Token (like a password for submitting new updates):</label>
-				<input type="text" id="mod-token" name="mod-token" placeholder="mypassword" />
+				<label for="mod-token">Mod Token (like a password, used for submitting new updates):</label>
+				<input type="password" id="mod-token" name="mod-token" placeholder="MyPassword" />
 			</div>
 			<div>
-				<label for="mod-desc-short">Short Mod Description (less than 20 characters!):</label>
-				<input type="text" id="mod-desc-short" name="mod-desc-short" placeholder="Scrolls is awesome" />
+				<label for="mod-desc-short">Short Mod Description (max length 20 characters):</label>
+				<input type="text" id="mod-desc-short" name="mod-desc-short" placeholder="Scrolls is awesome" maxlength="20" />
 			</div>
 			<div>
 				<label for="mod-desc-long">Long Mod Description (includes your mod's functionality, short guide on how to use):</label>
 				<textarea id="mod-desc-long" name="mod-desc-long"></textarea>
 			</div>
 			<div>
-				<label for="mod-version">Mod Version Code:</label>
-				<input type="text" id="mod-version" name="mod-version" placeholder="0.8" />
+				<label for="mod-version">Mod Version Code (max length 5 characters):</label>
+				<input type="text" id="mod-version" name="mod-version" placeholder="0.8" maxlength="5" />
 			</div>
 			<div>
 				<label for="mod-repo">Opensource link (link to your repository):</label>
 				<input type="text" id="mod-repo" name="mod-repo" placeholder="http://github.com/myawesomemod" />
 			</div>
 			<div>
-				<input type="submit" value="Submit"/>
+				<input type="submit" value="Submit" />
 			</div>
 		</form>
 	</div>

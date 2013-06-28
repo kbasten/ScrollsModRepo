@@ -263,7 +263,7 @@ body {
 }
 
 /* Text Boxes */
-.submit .submit-form input[type=text] {
+.submit .submit-form input[type=text], .submit .submit-form input[type=password], .submit .submit-form textarea {
     margin: 5px 0px;
     font-size: 16px;
     padding: 6px 10px;

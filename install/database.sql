@@ -36,13 +36,15 @@ CREATE TABLE IF NOT EXISTS `mods` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `identifier` varchar(32) NOT NULL,
   `name` varchar(32) NOT NULL,
-  `description` varchar(50) NOT NULL,
+  `description` varchar(20) NOT NULL,
   `longdesc` text NOT NULL,
   `version` int(5) NOT NULL,
   `versionCode` varchar(5) NOT NULL,
   `lastupdate` int(20) NOT NULL DEFAULT '0',
   `opensource` varchar(256) NOT NULL,
   `devname` varchar(100) NOT NULL,
+  `devemail` varchar(100) NOT NULL,
+  `bfish` varchar(64) NOT NULL,
   `bugs` varchar(500) NOT NULL,
   `available` int(1) NOT NULL DEFAULT '0',
   `downloads` int(6) NOT NULL DEFAULT '0',
@@ -59,6 +61,29 @@ CREATE TABLE IF NOT EXISTS `requests` (
   `exectime` int(3) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `submissions` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `description` varchar(20) NOT NULL,
+  `longdesc` text NOT NULL,
+  `versionCode` varchar(5) NOT NULL,
+  `opensource` varchar(256) NOT NULL,
+  `devname` varchar(100) NOT NULL,
+  `devemail` varchar(100) NOT NULL,
+  `ip` varchar(45) NOT NULL,
+  `bfish` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `updatequeue` (
+  `modid` int(5) NOT NULL,
+  `submitted` int(20) NOT NULL,
+  `ip` varchar(45) NOT NULL,
+  `whatsnew` text NOT NULL,
+  `newversionCode` varchar(5) NOT NULL,
+  PRIMARY KEY (`modid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
