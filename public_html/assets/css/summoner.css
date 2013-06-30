@@ -169,8 +169,8 @@ code {
 	color: #aaa;
 }
 
-.mod .code {
-	padding: 0px 8px;
+.mod code {
+	padding: 2px 8px;
 	font-size: 14px;
 }
 
