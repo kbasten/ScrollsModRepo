@@ -1,0 +1,288 @@
+/*******************************/
+/*       Made by Elystus       */
+/*******************************/
+
+/**** Setup ****/
+/* Clear browser defaults */
+* { 
+	margin: 0;
+	padding: 0;
+	border: 0; 
+}
+
+*:focus {
+	border: 0px;
+}
+
+/* stuff to clear floats */
+.clear { 
+	clear: both;
+}
+.clearfix { 
+	*zoom: 1;
+}
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after { 
+	clear: both;
+}
+
+/**** General Style ****/
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333333;
+	background-color: #ffffff;
+	
+}
+
+.wrapper {
+	display: block;
+	text-align: center;
+}
+
+.container {
+	width: 950px;
+	margin: auto;
+	text-align: left;
+	padding: 0px 10px;
+}
+
+.indent {
+	margin-left: 35px;
+}
+
+/*** Typography ***/
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+	font-family:  Arial, Helvetica, sans-serif;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 28px;
+	line-height: 34px;
+}
+
+h2{ 
+	font-size: 22px;
+	line-height: 26px; 
+}
+
+h3 { 
+	font-size: 20px;
+	line-height: 22px;
+}
+
+h4 { 
+	font-size: 18px;
+	line-height: 20px;
+}
+
+h5 { 
+	font-size: 14px;
+	line-height: 16px;
+}
+
+h6 { 
+	font-size: 12px;
+}
+
+/* General */
+strong { font-weight: bold; }
+em { font-style: italic; }
+
+/* Links */
+a { 
+	color: #FF9C23;
+	text-decoration: none;
+}
+a:hover { 
+	text-decoration: underline;
+}
+
+a, a:hover {
+	transition: color .3s, background .3s;
+	-moz-transition: color .3s, background .3s;
+	-webkit-transition: color .3s, background .3s;
+	-o-transition: color .3s, background .3s;
+}
+
+/* Code */
+code {
+	padding: 4px 8px;
+	background: #f3f3f3;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	display: inline-block;
+	width: auto;
+	margin: 12px 4px;
+}
+
+/**** Body ****/
+/** Content **/
+.content {
+	padding-top: 30px; 
+}
+
+.content .row:last-child {
+	padding-bottom: 0px;
+}
+
+.content .row {
+	padding-bottom: 20px;
+}
+
+.content .row .title {
+	color: #333333;
+}
+
+.content .row .info {
+	padding: 15px 25px 0px;
+}
+
+.content .row .info.no-title {
+	padding: 0px 25px;
+}
+
+.content .row .info p {
+	line-height: 20px;
+	font-size: 16px;
+}
+
+/* Mod list display */
+.mod {
+	padding: 10px 0px;
+}
+
+.mod .title small {
+	color: #aaa;
+}
+
+.mod .desc {
+	padding: 10px 25px;
+}
+
+.mod .desc .long p {
+	font-size: 14px;
+}
+
+.mod .desc .source {
+	padding: 10px 20px 0px;
+}
+
+.mod .desc .source p {
+	font-size: 12px;
+}
+
+.mod .desc .source .left {
+	display: inline-block;
+	float: left; 
+	font-weight: bold;
+	text-align: right;
+}
+
+.mod .desc .source .right {
+	display: inline-block;
+	float: left; 
+	margin-left: 10px;
+}
+
+
+/**** Specific Styling ****/
+/** Headers **/
+/* Header */
+.header {
+	background-color: #FF9C23;
+	color: #FFFFFF;
+	padding: 15px 0px;
+}
+
+.header .container {
+	width: 980px;
+}
+
+.header .menu {
+	float: right;
+}
+
+.header .menu a {
+	display: inline-block;
+	font-size: 18px;
+	line-height: 15px;
+	color: #FFFFFF;
+	border: 1px solid #FFBC66;
+	border-radius: 18px;
+	padding: 8px 12px;
+}
+
+.header .menu a:hover {
+	background: #FFBC66;
+	text-decoration: none;
+}
+
+/* Sub-Header */
+.sub-header {
+	background-color: #FFBC66;
+	color: #FFFFFF;
+	padding: 4px 0px
+}
+
+.sub-header .return {
+	float: left;
+	position: absolute;
+}
+
+.sub-header .return a {
+	color: #FFFFFF;
+}
+
+.sub-header .return a:hover {
+	text-decoration: underline;
+}
+
+.sub-header .title {
+	display: absolute;
+	text-align: center;
+}
+
+/**** Footer ****/
+.footer {
+	margin: 20px 0px;
+	display: block;
+	border-top: 1px solid #ccc;
+	padding: 10px 0px;
+}
+
+.footer .links {
+	list-style: none;
+}
+
+.footer .links.right {
+	float: right;
+	list-style: none;
+}
+
+.footer .links li {
+	display: inline-block;
+	text-align: center;
+	padding: 0px 10px;
+}
+
+.footer .links li {
+	display: inline-block;
+	float: left; 
+	text-align: center;
+	vertical-align: middle;
+	padding: 0px 10px;
+}
+
+.footer .links li a {
+	color: #ccc;
+}
+
+.footer .links li a:hover {
+	color: #FF9C23;
+	text-decoration: none;
+}
