@@ -153,11 +153,25 @@ code {
 
 /* Mod list display */
 .mod {
+	padding: 20px 0px 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.mod:first-child {
 	padding: 10px 0px;
+}
+
+.mod:last-child{
+	border-bottom: none;
 }
 
 .mod .title small {
 	color: #aaa;
+}
+
+.mod .code {
+	padding: 0px 8px;
+	font-size: 14px;
 }
 
 .mod .desc {
