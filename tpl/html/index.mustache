@@ -1,38 +1,50 @@
-<div class="intro">
-    <p>
-        Welcome to the {{ REPONAME }} hosted Mod Repository for Summoner : Modloader for Scrolls.
-	Here you will find an overview of the available mods in this repository, with their 
-	functionality and requirements. Installing mods from this repository is done in-game.
-	Add this repository to Summoner by adding the following url in-game: 
-    </p>
-	<code>{{ REPOURL }}</code>
-    <p>
-	Summoner : Modloader for Scrolls can be downloaded from the <a href="http://www.scrollsguide.com/summoner">Summoner page on Scrollsguide</a>.
-	Bug reports regarding Summoner can be posted in the <a href="http://www.scrollsguide.com/forum/viewforum.php?f=62">appropriate forum section on 
-	Scrollsguide</a>.
-    </p>
+<div class="row">
+	<div class="title">
+		<h3>What is this place?</h3>
+	</div>
+	<div class="info">
+		<p>
+			Welcome to the {{ REPONAME }} hosted Mod Repository for Summoner : Modloader for Scrolls.
+			Here you will find an overview of the available mods in this repository, with their 
+			functionality and requirements. Installing mods from this repository is done in-game.
+			Add this repository to Summoner by adding the following url in-game: 
+		</p>
+		<div class="indent">
+			<code>{{ REPOURL }}</code>
+		</div>
+		<p>
+			Summoner : Modloader for Scrolls can be downloaded from the <a href="http://www.scrollsguide.com/summoner">Summoner page on Scrollsguide</a>.
+			Bug reports regarding Summoner can be posted in the <a href="http://www.scrollsguide.com/forum/viewforum.php?f=62">appropriate forum section on 
+			Scrollsguide</a>.
+		</p>
+	</div>
 </div>
-<div class="list">
-{{# MODS }}
-    <div class="mod">
-        <div class="title">
-            <h3><a href="/mod/{{ IDENTIFIER }}">{{ NAME }}</a> <small> - {{ DESC }}</small></h3>
-        </div>
-        <div class="info">
-            <div>
-                <p>{{{ LONGDESC }}}</p>
-            </div>
-            <div class="source">
-                <div class="left">
-                    <p>Opensource link:</p>
-                    <p>Version:</p>
-                </div>
-                <div class="right">
-                    <p><a href="{{ OPENSOURCE }}" target="_blank">{{ OPENSOURCE }}</a></p>
-                    <p>{{ VCODE }}, last updated {{ LASTUPDATE }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-{{/ MODS }}
+<div class="row">
+	<div class="title">
+		<h3>Summoner Mod List:</h3>
+	</div>
+	<div class="info">
+	{{# MODS }}
+		<div class="mod">
+			<div class="title">
+				<h4><a href="/mod/{{ IDENTIFIER }}">{{ NAME }}</a> <small> {{ DESC }}</small></h4>
+			</div>
+			<div class="desc">
+				<div class="long">
+					<p>{{{ LONGDESC }}}</p>
+				</div>
+				<div class="source clearfix">
+					<div class="left">
+						<p>Opensource link:</p>
+						<p>Version:</p>
+					</div>
+					<div class="right">
+						<p><a href="{{ OPENSOURCE }}" target="_blank">{{ OPENSOURCE }}</a></p>
+						<p>{{ VCODE }}, last updated {{ LASTUPDATE }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	{{/ MODS }}
+	</div>
 </div>
