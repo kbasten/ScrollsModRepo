@@ -1,0 +1,61 @@
+/*******************************/
+/*       Made by Elystus       */
+/*******************************/
+
+/**** Form Style! ****/
+form div {
+	padding: 8px 0px;
+}
+
+/* Labels */
+label {
+	font-size: 16px;
+	line-height: 22px;
+}
+
+input[type=text], form input[type=password], form textarea {
+	margin: 5px 0px;
+	font-size: 16px;
+	padding: 6px 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	color: #333;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+	vertical-align: middle;
+}
+
+/* Text Boxes */
+textarea {
+	resize: vertical;
+	height: 125px;
+}
+
+form input[type=text]:focus, form input[type=password]:focus, form textarea:focus {
+	border-color: #FEB62F;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075),0 0 5px rgba(254,182,47,0.5);
+}
+
+/* Submit Button */
+input[type=submit] {
+	margin: 10px 0px;
+	width: 200px;
+	border-radius: 3px;
+	background-image: -moz-linear-gradient(#fafafa, #dadada);
+	background-image: -webkit-linear-gradient(#fafafa, #dadada);
+	background-image: linear-gradient(#fafafa, #dadada);
+	background-repeat: repeat-x;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+	border: 1px solid #ccc;
+	padding: 5px 0px;
+	width: 100%;
+}
+
+input[type=submit]:hover {
+	background-color: #dadada;
+	background-image: none;
+	border-color: #ccc #ccc #b5b5b5;
+}
