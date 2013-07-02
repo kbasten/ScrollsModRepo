@@ -12,8 +12,8 @@
 		public function __construct(PDO $pdo){
 			parent::__construct($pdo);
 			
-			$this->setHeader("Content-type", "text/html");
-			$this->setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			$this->setHeader(new Header("Content-type", "text/html"));
+			$this->setHeader(new Header("Cache-Control", "no-cache, no-store, must-revalidate"));
 		}
 		
 		// loads the mustache render engine, this is not done for cached requests

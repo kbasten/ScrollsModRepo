@@ -7,7 +7,7 @@
 			parent::__construct($pdo);
 			
 			// default json header :)
-			$this->setHeader("Content-type", "application/json");
+			$this->setHeader(new Header("Content-type", "application/json"));
 		}
 	
 		final public function getType(){

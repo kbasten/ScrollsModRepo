@@ -71,8 +71,19 @@
 		}
 		
 		// adds header to the request
-		final protected function setHeader($id, $content){
-			$this->headers[$id] = $content;
+		final protected function setHeader(Header $h){
+			// replace content if header already exists
+			$replaced = false;
+			for ($i = 0; $i < count($this->headers) && !$replaced; $i++){
+				if ($this->headers[$i]->getKey() == $h->getKey()){
+					$this->headers[$i]->setValue($h->getValue());
+					$replaced = true;
+				}
+			}
+			// no matches found, add new header
+			if (!$replaced){
+				$this->headers[] = $h;
+			}
 		}
 		
 		final public function getHeaders(){
@@ -123,6 +134,34 @@
 		
 		public function getDB(){
 			return $this->pdo;
+		}
+	}
+	
+	class Header {
+	
+		private $key = "";
+		private $value = "";
+	
+		// for things like "HTTP/1.0 404 Not Found", $value is omitted
+		public function __construct($key, $value = ""){
+			$this->key = $key;
+			$this->value = $value;
+		}
+		
+		public function getKey(){
+			return $this->key;
+		}
+		
+		public function setValue($value){
+			$this->value = $value;
+		}
+		
+		public function __toString(){
+			if ($this->key == ""){
+				return $this->value;
+			} else {
+				return sprintf("%s: %s", $this->key, $this->value);
+			}
 		}
 	}
 	

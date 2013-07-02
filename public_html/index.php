@@ -66,8 +66,9 @@
 					$result = $r->getResult();
 					
 					// add headers for different content types etc.
-					foreach ($r->getHeaders() as $headerId => $headerContent){
-						header(sprintf("%s: %s", $headerId, $headerContent));
+					foreach ($r->getHeaders() as $h){
+						// formatting handled by toString of Header
+						header($h);
 					}
 					
 					$executionTime = (int)((microtime(true) - $startTime) * 1000);

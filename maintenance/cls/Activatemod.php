@@ -7,7 +7,8 @@
 			}
 			$modId = $params[0];
 			
-			$sth = $this->getDB()->prepare("SELECT id, name, version, available
+			// also select devname and email for mailing updates
+			$sth = $this->getDB()->prepare("SELECT id, name, devname, devemail, version, available
 						FROM mods
 						WHERE id = :id");
 			$sth->bindValue(":id", $modId, PDO::PARAM_INT);
@@ -31,6 +32,23 @@
 						$sth->bindValue(":id", $modExists["id"], PDO::PARAM_INT);
 						
 						if ($sth->execute()){
+							// send mail to developer to notify him of the update
+							$m = new Mailer(new MailAddress("mods@scrollsguide.com", sprintf("%s Mod Repo", REPO_NAME)));
+							
+							$m->addRecipient(new MailAddress($modExists["devemail"], $modExists["devname"]));
+							
+							$m->setSubject("Your mod has been added.");
+
+							$tpl = $m->getMustache()->loadTemplate("mod_activated.mustache");
+							$m->setBody($tpl->render(array(
+										"REPONAME" => REPO_NAME, 
+										"REPOURL" => REPO_URL, 
+										"DEVNAME" => $modExists["devname"], 
+										"MODNAME" => $modExists["name"]
+							)));
+						
+							$m->send();
+						
 							echo sprintf("Mod %s is now available. Wait for the cache to update.\n", $modExists["name"]);
 						} else {
 							throw new MException("Mot not made available, database error.");

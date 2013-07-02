@@ -10,6 +10,7 @@
 	
 	require_once MBASE_PATH . "../config.php";	
 	require_once "Maintenance.php";
+	require_once "cls/Mailer.php";
 	
 	if (!isset($argv[1])){
 		echo "No function specified.\n";

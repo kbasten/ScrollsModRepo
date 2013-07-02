@@ -46,15 +46,15 @@
 				$this->setResult(true, "");
 				
 				$this->setFilePath(sprintf("../downloads/%s/%d/installer.%s", $platform, Version::$version, $platformConfig[$platform]["extension"]));
-				$this->setHeader("Content-type", $platformConfig[$platform]["type"]);
+				$this->setHeader(new Header("Content-type", $platformConfig[$platform]["type"]));
 				
 				// display a more user-friendly name instead of installer.exe/dmg
-				$this->setHeader("Content-Disposition", sprintf("attachment; filename=\"Summoner-%s.%s\"", $platform, $platformConfig[$platform]["extension"]));
+				$this->setHeader(new Header("Content-Disposition", sprintf("attachment; filename=\"Summoner-%s.%s\"", $platform, $platformConfig[$platform]["extension"])));
 			} else if ($fields["url_1"] == "update"){
 				$this->setResult(true, "");
 			
 				$this->setFilePath(sprintf("../downloads/update/%d/updater.exe", Version::$version));
-				$this->setHeader("Content-type", "application/x-msdos-program");
+				$this->setHeader(new Header("Content-type", "application/x-msdos-program"));
 				// no need to set a user-friendly name here, this is only called by 
 				// the framework from in-game, no browser interaction
 			} else if ($fields["url_1"] == "mod"){			
@@ -82,11 +82,11 @@
 					$this->setFilePath(sprintf('../downloads/mods/%1$s/%2$d/%1$s.mod.dll', $mod["name"], $mod["version"]));
 					
 					// add header for dll files
-					$this->setHeader("Content-type", "application/x-msdos-program");
+					$this->setHeader(new Header("Content-type", "application/x-msdos-program"));
 					
 					// add option to download file with original name
 					if (isset($_GET["realname"])){
-						$this->setHeader("Content-Disposition", sprintf("attachment; filename=\"%s.mod.dll\"", $mod["name"]));
+						$this->setHeader(new Header("Content-Disposition", sprintf("attachment; filename=\"%s.mod.dll\"", $mod["name"])));
 					}
 				}
 			}
