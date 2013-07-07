@@ -75,6 +75,7 @@
 			// replace content if header already exists
 			$replaced = false;
 			for ($i = 0; $i < count($this->headers) && !$replaced; $i++){
+				// this header already exists, replace its value
 				if ($this->headers[$i]->getKey() == $h->getKey()){
 					$this->headers[$i]->setValue($h->getValue());
 					$replaced = true;

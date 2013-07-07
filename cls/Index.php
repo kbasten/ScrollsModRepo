@@ -18,6 +18,7 @@
 			$sth = $this->getDB()->prepare("SELECT identifier, name, description, longdesc, versionCode, downloads,
 									opensource, lastUpdate
 						FROM mods
+						WHERE available = 1
 						ORDER BY name ASC");
 			$sth->execute();
 		
