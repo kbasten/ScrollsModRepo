@@ -1,7 +1,7 @@
 <?php
 	class Version extends JSONRequest {
 	
-		public static $version = 3;
+		public static $version = 4;
 	
 		public function __construct(PDO $pdo){
 			parent::__construct($pdo);

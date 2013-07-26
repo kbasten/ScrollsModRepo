@@ -24,7 +24,8 @@
 			// this is just the general repo info
 			if (!isset($fields["url_1"])){
 				$sth = $this->getDB()->prepare("SELECT COUNT(*) AS c
-							FROM mods");
+							FROM mods
+							WHERE available = 1");
 				$sth->execute();
 				
 				$result = $sth->fetch(PDO::FETCH_ASSOC);
