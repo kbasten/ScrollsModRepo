@@ -18,23 +18,23 @@
 		<form method="POST" action="/cp/update">
 			<div>
 				<label for="mod-name">Mod Name (name of the mod to update, exact match):</label>
-				<input type="text" id="mod-name" name="mod-name" placeholder="MyAwesomeMod" />
+				<input type="text" id="mod-name" name="mod-name" placeholder="MyAwesomeMod" required />
 			</div>
 			<div>
 				<label for="mod-author-email">Mod Author Email (the email you used when you submitted the mod):</label>
-				<input type="text" id="mod-author-email" name="mod-author-email" placeholder="example@example.com" />
+				<input type="text" id="mod-author-email" name="mod-author-email" placeholder="example@example.com" required />
 			</div>
 			<div>
 				<label for="mod-token">Mod Token (the token you used when you submitted the mod):</label>
-				<input type="password" id="mod-token" name="mod-token" placeholder="MyPassword" />
+				<input type="password" id="mod-token" name="mod-token" placeholder="MyPassword" required />
 			</div>
 			<div>
 				<label for="mod-version">Mod Version Code (new version code for the mod, max length 5 characters):</label>
-				<input type="text" id="mod-version" name="mod-version" placeholder="1.2" maxlength="5" />
+				<input type="text" id="mod-version" name="mod-version" placeholder="1.2" maxlength="5" required />
 			</div>
 			<div>
 				<label for="mod-new">What's New (little bit of information about this update):</label>
-				<textarea id="mod-new" name="mod-new"></textarea>
+				<textarea id="mod-new" name="mod-new" required></textarea>
 			</div>
 			<div>
 				<input type="submit" value="Submit" />
