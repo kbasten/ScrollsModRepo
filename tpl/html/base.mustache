@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html> <html>
 	<head>
 		<title>{{ TITLE }}</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="/assets/css/summoner.css" />
 		<link rel="stylesheet" type="text/css" href="/assets/css/forms.css" />
-
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -24,9 +22,11 @@
 			</div>
 			<div class="sub-header">
 				<div class="container clearfix">
-					<div class="return">
-						<h3><a href="/">← Return to Index</a></h3>
-					</div>
+					{{^ INDEX }}
+						<div class="return">
+							<h3><a href="/">&larr; Return to Index</a></h3>
+						</div>
+					{{/ INDEX }}
 					<div class="title">
 						<h2>{{ PHEADER }}</h2>
 					</div>
@@ -36,7 +36,7 @@
 				<div class="content">
 					{{{ CONTENT }}}
 				</div>
-			</div>	
+			</div>
 			<div class="container">
 				<div class="footer clearfix">
 					<ul class="links right">
@@ -52,5 +52,5 @@
 				</div>
 			</div>
 		</div>
-	</body>
+	</body> 
 </html>

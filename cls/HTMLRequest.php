@@ -13,7 +13,7 @@
 			parent::__construct($pdo);
 			
 			$this->setHeader(new Header("Content-type", "text/html"));
-			$this->setHeader(new Header("Cache-Control", "no-cache, no-store, must-revalidate"));
+			// $this->setHeader(new Header("Cache-Control", "no-cache, no-store, must-revalidate"));
 		}
 		
 		// loads the mustache render engine, this is not done for cached requests
@@ -57,11 +57,18 @@
 		}
 		
 		public function getHTMLContent($pageContent){
-			return $this->baseTpl->render(array(
+			$tplVars = array(
 						"TITLE"		=> $this->title,
 						"PHEADER"	=> $this->pageHeader,
 						"CONTENT"	=> $pageContent
-			));
+			);
+			
+			// heh, fix this at some point
+			if ($this->pageHeader == "Repository index"){
+				$tplVars["INDEX"] = true;
+			}
+		
+			return $this->baseTpl->render($tplVars);
 		}
 		
 		// override this from the default cache id function,

@@ -28,7 +28,7 @@
 							"IDENTIFIER"=> $mod["identifier"],
 							"NAME"		=> $mod["name"],
 							"DESC"		=> $mod["description"],
-							"LONGDESC"	=> $mod["longdesc"],
+							"LONGDESC"	=> nl2br($mod["longdesc"]),
 							"OPENSOURCE"=> $mod["opensource"],
 							"VCODE"		=> $mod["versionCode"],
 							"LASTUPDATE"=> date("M jS Y", $mod["lastUpdate"])

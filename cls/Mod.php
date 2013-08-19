@@ -28,7 +28,7 @@
 				$tpl = $this->m->loadTemplate("mod");
 				
 				$page = $tpl->render(array(
-							"LONGDESC"		=> $mod["longdesc"],
+							"LONGDESC"		=> nl2br($mod["longdesc"]),
 							"DEV"			=> $mod["devname"],
 							"OPENSOURCE"	=> $mod["opensource"],
 							"VCODE"			=> $mod["versionCode"],
